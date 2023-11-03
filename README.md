@@ -1,3 +1,3 @@
 # Thrust-Vector-Control
 
-abc
+this is no longer open source piss off berkeley
