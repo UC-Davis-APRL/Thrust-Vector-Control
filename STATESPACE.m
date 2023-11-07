@@ -21,6 +21,12 @@ COP = 1;
 COM = 1;
 statStabilityMargin = (COP - COM) / fuselageDiameter;
 inertiaTransverse = 1;
+thrust = 1;
+
+mu1Zero = 1; %% Gimbal angle 1
+mu2Zero = 1; %% Gimbal angle 2
+controlTorqueArm = 1; %% distance between nozzle gimbal point and cm
+
 
 a11 = 0;
 a12 = rZero;
@@ -79,6 +85,30 @@ A = [
     a41 a42 a43 a44 a45 a46 a47;
     a51 a52 a53 a54 a55 a56 a57;
     a61 a62 a63 a64 a65 a66 a67;
-    a71 a72 a73 a74 a75 76 a77;
+    a71 a72 a73 a74 a75 76 a77
     ]
 
+b11 = - thrust * sin(mu1Zero) * cos(mu2Zero) / m;
+b12 = - thrust * cos(mu1Zero) * sin(mu2Zero) / m;
+b21 = thrust * sin(mu1Zero) * cos(mu2Zero) / m;
+b22 = - thrust * cos(mu1Zero) * cos(mu2Zero) / m;
+b31 = - thrust * cos(mu1Zero) / m;
+b32 = 0;
+b41 = - thrust * controlTorqueArm * cos(mu1Zero) / inertiaTransverse;
+b42 = 0;
+b51 = - thrust * controlTorqueArm * sin(mu1Zero) * sin(mu2Zero) / inertiaTransverse;
+b52 = thrust * controlTorqueArm * cos(mu1Zero) * cos(mu2Zero) / inertiaTransverse;
+b61 = 0;
+b62 = 0;
+b71 = 0;
+b72 = 0;
+
+B = [
+    b11 b12;
+    b21 b22;
+    b31 b32;
+    b41 b42;
+    b51 b52;
+    b61 b62;
+    b71 b72
+]
