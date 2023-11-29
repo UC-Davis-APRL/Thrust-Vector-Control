@@ -1,0 +1,14 @@
+
+
+l=1;
+d=1;
+R=l*sin(degtorad(10));
+
+for t = 0:0.2:1.6
+    r1 = R*cos(t);
+    r2 = R*sin(t);
+    R = sqrt(r1^2+r2^2); %for test (passed)
+    
+   
+
+end
