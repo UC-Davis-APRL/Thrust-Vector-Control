@@ -27,8 +27,11 @@ Q = diag([2.5 2.5 2.5 100 100 100]);
 
 R = diag([9 9 9]);
 
+open_system("modelsim")
+
+    
 % initial euler angle conditions
-eul = deg2rad([0 -45 0]);
+eul = deg2rad([10 5 -5]);
 
 % conversion to quaternions
 quat = eul2quat(eul);
@@ -41,7 +44,9 @@ I = transpose([omega, quat(2:4)]);
 % LQR calculion
 [K,S,P] = lqr(A,B,Q,R);
 
-open_system("modelsim")
     
 set_param("modelsim","SimulationCommand","Start")
 
+
+
+inv(J)
