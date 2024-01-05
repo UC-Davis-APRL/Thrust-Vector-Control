@@ -1,7 +1,7 @@
 Ix = 79.06;
 Iy = 79.06;
 Iz = 0.77;
-m = 68.04
+m = 68.04;
 
 g = 9.81;
 
@@ -31,12 +31,16 @@ D = zeros(12,4);
 
 Q = diag([100 100 100 1 1 1 10 10 10 5 5 5]);
 
-R = 1
+R = 1;
 
-initialConditions = [0 0 0 0 0 0 0 0 0 0 0 0]
-goalConditions = [0 0 0 0 0 0 0 0 0 0 0 0]
+
+initialConditions = [deg2rad(10) deg2rad(15) deg2rad(-12) 0 0 0 0 0 0 0 0 0];
+goalConditions = [0 0 0 0 0 0 0 0 0 0 0 0];
 
 
 [K,S,P] = lqr(A,B,Q,R);
 
+
+open_system("fullmodel")
 set_param("fullmodel","SimulationCommand","Start")
+
