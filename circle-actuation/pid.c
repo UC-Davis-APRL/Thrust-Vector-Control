@@ -1,5 +1,10 @@
 #include "pid.h"
 
+void init(PID_Controller* pidControllerPtr) {
+    pidControllerPtr->prevError = 0.0;
+    pidControllerPtr->integral = 0.0;
+}
+
 double calculate(PID_Controller* pidControllerPtr, double currentState, double setpoint) {
     double kP = pidControllerPtr->kP;
     double kI = pidControllerPtr->kI;

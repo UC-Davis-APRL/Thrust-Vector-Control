@@ -13,12 +13,14 @@ int main() {
     const double gimbleRadius = 5.0; // inches
 
     PID_Controller xActuatorController;
+    init(&xActuatorController);
     // FIXME: tune PID coefficients
     xActuatorController.kP = 0.0;
     xActuatorController.kI = 0.0;
     xActuatorController.kD = 0.0;
 
     PID_Controller yActuatorController;
+    init(&yActuatorController);
     // FIXME: tune PID coefficients
     yActuatorController.kP = 0.0;
     yActuatorController.kI = 0.0;

@@ -6,10 +6,11 @@ typedef struct PID_struct {
     double kI;
     double kD;
 
-    double prevError = 0;
-    double integral = 0;
+    double prevError;
+    double integral;
 } PID_Controller;
 
+void init(PID_Controller* pidControllerPtr);
 double calculate(PID_Controller* pidControllerPtr, double currentState, double setpoint);
 
 #endif
