@@ -5,7 +5,7 @@ void init(PID_Controller* pidControllerPtr) {
     pidControllerPtr->integral = 0.0;
 }
 
-double calculate(PID_Controller* pidControllerPtr, double currentState, double setpoint) {
+double calculate(PID_Controller* pidControllerPtr, const double currentState, const double setpoint) {
     double kP = pidControllerPtr->kP;
     double kI = pidControllerPtr->kI;
     double kD = pidControllerPtr->kD;

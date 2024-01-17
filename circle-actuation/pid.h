@@ -11,6 +11,6 @@ typedef struct PID_struct {
 } PID_Controller;
 
 void init(PID_Controller* pidControllerPtr);
-double calculate(PID_Controller* pidControllerPtr, double currentState, double setpoint);
+double calculate(PID_Controller* pidControllerPtr, const double currentState, const double setpoint);
 
 #endif
