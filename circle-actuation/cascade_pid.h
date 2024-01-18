@@ -9,6 +9,6 @@ typedef struct Cascaded_PID_struct {
 } Cascaded_PID_Controller;
 
 void init(Cascaded_PID_Controller controller);
-double calculateCascadedOutput(Cascaded_PID_Controller* controllerPtr, double primarySetpoint, double currentPrimaryState, double currentSecondaryState);
+double calculateCascadedOutput(Cascaded_PID_Controller* controllerPtr, const double primarySetpoint, const double currentPrimaryState, const double currentSecondaryState);
 
 #endif

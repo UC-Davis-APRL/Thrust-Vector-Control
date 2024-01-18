@@ -12,7 +12,7 @@ void init(Cascaded_PID_Controller* controllerPtr) {
     controllerPtr->secondary = secondary;
 }
 
-double calculateCascadedOutput(Cascaded_PID_Controller* controllerPtr, double primarySetpoint, double currentPrimaryState, double currentSecondaryState) {
+double calculateCascadedOutput(Cascaded_PID_Controller* controllerPtr, const double primarySetpoint, const double currentPrimaryState, const double currentSecondaryState) {
     PID_Controller primary = controllerPtr->primary;
     PID_Controller secondary = controllerPtr->secondary;
 
