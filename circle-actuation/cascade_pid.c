@@ -1,7 +1,7 @@
 #include "cascade_pid.h"
 #include "pid.h"
 
-void init(Cascaded_PID_Controller* controllerPtr) {
+void initCascadedController(Cascaded_PID_Controller* controllerPtr) {
     PID_Controller primary;
     PID_Controller secondary;
 
