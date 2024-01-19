@@ -1,5 +1,4 @@
 #include "cascade_pid.h"
-#include "pid.h"
 
 void initCascadedController(Cascaded_PID_Controller* controllerPtr) {
     PID_Controller primary;
