@@ -4,7 +4,7 @@
 #include "pid.h"
 
 typedef struct Cascaded_PID_struct {
-    double T;
+    double ullageVolumeThreshold;
 
     PID_Controller primary;
     PID_Controller secondary;

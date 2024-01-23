@@ -12,8 +12,8 @@ void initCascadedController(Cascaded_PID_Controller* controllerPtr) {
 }
 
 void updateGains(Cascaded_PID_Controller* controllerPtr) {
-    double currentTime = 0.0; // FIXME: get actual timestamp in seconds
-    double multiplier = currentTime / controllerPtr->T;
+    double currentUllageVolume = 0.0; // FIXME: get actual ullage volume reading from sensor
+    double multiplier = currentUllageVolume / controllerPtr->ullageVolumeThreshold;
 
     if (multiplier < 1) {
         PID_Controller primary = controllerPtr->primary;
