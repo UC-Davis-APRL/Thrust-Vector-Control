@@ -46,7 +46,7 @@ double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
     PID_Controller secondary = controllerPtr->secondary;
 
     double desiredMassFlowRate = 1;
-    double desiredCv = desiredMassFlowRate * sqrt(1.0 / desiredPressureDrop);
+    double desiredCv = desiredMassFlowRate * sqrt(controllerPtr->specificGravity / desiredPressureDrop);
     double valveFeedforward = 7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)));
     double valveSetpoint = calculate(&primary, currentPressure, pressureSetpoint);
 
