@@ -22,8 +22,7 @@ void initEregController(Ereg_PID_Controller* controllerPtr, Ereg_Type_t eregType
     controllerPtr->secondary = secondary;
 }
 
-void updateGains(Ereg_PID_Controller* controllerPtr) {
-    double currentUllageVolume = 0.0; // FIXME: get actual ullage volume reading from sensor
+void updateGains(Ereg_PID_Controller* controllerPtr, double currentUllageVolume) {
     double multiplier = currentUllageVolume / controllerPtr->ullageVolumeThreshold;
 
     if (multiplier < 1) {
@@ -38,19 +37,18 @@ void updateGains(Ereg_PID_Controller* controllerPtr) {
 }
 
 double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
-                               const double desiredPressureDrop,
                                const double pressureSetpoint,
                                const double currentPressure,
                                const double currentValveAngle) {
     PID_Controller primary = controllerPtr->primary;
     PID_Controller secondary = controllerPtr->secondary;
 
-    double desiredMassFlowRate = 1;
-    double desiredCv = desiredMassFlowRate * sqrt(controllerPtr->specificGravity / desiredPressureDrop);
+    double desiredFlowRate = 1;
+    double desiredCv = desiredFlowRate * sqrt(controllerPtr->specificGravity / fabs(currentPressure - pressureSetpoint));
     double valveFeedforward = 7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)));
-    double valveSetpoint = calculate(&primary, currentPressure, pressureSetpoint);
+    double valveSetpoint = calculate(&primary, currentPressure, pressureSetpoint) + valveFeedforward;
 
-    double valveActuation = calculate(&secondary, currentValveAngle, valveSetpoint + valveFeedforward);
+    double valveActuation = calculate(&secondary, currentValveAngle, valveSetpoint);
 
     controllerPtr->primary = primary;
     controllerPtr->secondary = secondary;

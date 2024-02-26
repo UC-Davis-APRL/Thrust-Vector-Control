@@ -16,9 +16,8 @@ typedef enum Ereg_Type {
 } Ereg_Type_t;
 
 void initEregController(Ereg_PID_Controller* controllerPtr, Ereg_Type_t eregType);
-void updateGains(Ereg_PID_Controller* controllerPtr);
+void updateGains(Ereg_PID_Controller* controllerPtr, double currentUllageVolume);
 double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
-                               const double desiredPressureDrop,
                                const double pressureSetpoint,
                                const double currentPressure,
                                const double currentValveAngle);
