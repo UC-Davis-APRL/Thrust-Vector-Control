@@ -2,6 +2,8 @@
 
 #include "ereg_pid.h"
 
+#define M_PI 3.1415
+
 void initEregController(Ereg_PID_Controller* controllerPtr, Ereg_Type_t eregType) {
     PID_Controller primary;
     PID_Controller secondary;
@@ -45,7 +47,7 @@ double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
 
     double desiredFlowRate = 1;
     double desiredCv = desiredFlowRate * sqrt(controllerPtr->specificGravity / fabs(currentPressure - pressureSetpoint));
-    double valveFeedforward = 7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)));
+    double valveFeedforward = (7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)))) * M_PI / 2.0;
     double valveSetpoint = calculate(&primary, currentPressure, pressureSetpoint) + valveFeedforward;
 
     double valveActuation = calculate(&secondary, currentValveAngle, valveSetpoint);
