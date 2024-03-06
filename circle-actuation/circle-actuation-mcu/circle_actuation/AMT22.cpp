@@ -68,11 +68,11 @@ uint16_t AMT22::getPosition() {
   // Get low byte, release the CS line
   currentPosition |= spiWriteRead(AMT22_NOP, true);
 
-  evenCheckbit = currentPosition & (0x01 << 14);
-  oddCheckbit = currentPosition & (0x01 << 15);
+  evenCheckbit = (currentPosition & (0x01 << 14)) >> 14;
+  oddCheckbit = (currentPosition & (0x01 << 15)) >> 15;
 
   evenChecksum = currentPosition & 0x01;
-  oddChecksum = currentPosition & (0x01 << 1);
+  oddChecksum = (currentPosition & (0x01 << 1)) >> 1;
 
   for (uint8_t i = 2; i < 14; i++) {
     if ((i % 2) == 0) evenChecksum ^= (currentPosition & (0x01 << i)) >> i;
