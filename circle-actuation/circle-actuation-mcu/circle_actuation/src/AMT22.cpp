@@ -12,7 +12,7 @@ AMT22::AMT22(uint8_t CS, RES_Type_t resType) {
   encoderHealthy = true;
 
   SPI.begin();
-  pinmode(CS, OUTPUT);
+  pinMode(CS, OUTPUT);
 
   // Get the CS line high (default inactive state)
   digitalWrite(CS, HIGH);
