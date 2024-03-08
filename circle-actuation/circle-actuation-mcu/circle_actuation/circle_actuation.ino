@@ -32,6 +32,8 @@ AMT22 yEncoder(yEncoderChipSelect, RES_Type_t::RES14);
 PID_Controller xController(0.0, 0.0, 0.0); 
 PID_Controller yController(0.0, 0.0, 0.0);
 
+bool healthFlag = true;
+
 void setup() {
   for (int i = 0; i <= 100; i++) {
     if (xEncoder.isHealthy() && yEncoder.isHealthy()) {
@@ -53,6 +55,7 @@ void setup() {
     }
     else {
       // One of the encoders is dead, what to do?
+      healthFlag = false;
     }
   }
 

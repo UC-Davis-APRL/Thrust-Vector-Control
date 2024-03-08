@@ -58,7 +58,8 @@ bool AMT22::isHealthy() {
 /**
 * This function gets the absolute position
 * from the AMT22 encoder using the SPI bus.
-* Error values are returned as 0xFFFF.
+* Returns the last valid position if we read
+* bad data.
 */
 uint16_t AMT22::getPosition() {
   uint16_t currentPosition;

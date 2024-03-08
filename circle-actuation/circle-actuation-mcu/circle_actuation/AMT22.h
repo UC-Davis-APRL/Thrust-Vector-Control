@@ -9,10 +9,6 @@ enum class RES_Type_t {
   RES12, RES14
 }
 
-enum class AMT22_State_t {
-  OK, FAULT
-}
-
 class AMT22 {
   private:
     uint8_t CS;
