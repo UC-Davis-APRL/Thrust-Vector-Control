@@ -7,6 +7,10 @@ AMT22::AMT22(uint8_t CS, RES_Type_t resType) {
   this->CS = CS;
   this->resType = resType;
 
+  lastGoodRead = 0;
+  badReadCounter = 0;
+  encoderHealthy = true;
+
   SPI.begin();
   pinmode(CS, OUTPUT);
 
@@ -47,6 +51,10 @@ uint8_t AMT22::spiWriteRead(uint8_t byte, uint8_t releaseLine) {
   return data;
 }
 
+bool AMT22::isHealthy() {
+  return encoderHealthy;
+}
+
 /**
 * This function gets the absolute position
 * from the AMT22 encoder using the SPI bus.
@@ -85,14 +93,21 @@ uint16_t AMT22::getPosition() {
   if ((evenCheckbit == evenChecksum) && (oddCheckbit == oddChecksum)) {
     // We got back a good position, mask away checkbits
     currentPosition &= 0x3FFF;
+
+    // Reset the counter, previous bad read was a random occurrence
+    badReadCounter = 0;
   }
   else {
-    return 0xFFFF; // bad position
+    if (encoderHealthy) badReadCounter++;
+    if (badReadCounter >= 200) encoderHealthy = false;
+
+    return lastGoodRead; // bad read, return the last valid position
   }
 
   // If resolution is 12 bits, shift bits
-  if (resType == RES12) currentPosition = currentPosition >> 2;
+  if (resType == RES_Type_t::RES12) currentPosition = currentPosition >> 2;
 
+  lastGoodRead = currentPosition;
   return currentPosition;
 }
 

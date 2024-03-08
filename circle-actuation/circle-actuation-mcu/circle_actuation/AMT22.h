@@ -9,16 +9,26 @@ enum class RES_Type_t {
   RES12, RES14
 }
 
+enum class AMT22_State_t {
+  OK, FAULT
+}
+
 class AMT22 {
   private:
     uint8_t CS;
+    uint8_t badReadCounter;
+    uint16_t lastGoodRead;
+    
     RES_Type_t resType;
+    bool encoderHealthy;
 
     void setCSLine(uint8_t pinState);
     uint8_t spiWriteRead(uint8_t byte, uint8_t releaseLine);
   
   public:
     AMT22(uint8_t CS, RES_Type_t resType);
+
+    bool isHealthy();
 
     uint16_t getPosition();
     void zeroAMT22();
