@@ -7,7 +7,7 @@
 
 enum class RES_Type_t {
   RES12, RES14
-}
+};
 
 class AMT22 {
   private:
