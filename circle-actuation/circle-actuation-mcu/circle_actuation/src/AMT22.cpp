@@ -88,8 +88,8 @@ uint16_t AMT22::getPosition() {
     else oddChecksum ^= (currentPosition & (0x01 << i)) >> i;
   }
 
-  evenChecksum = ~evenChecksum;
-  oddChecksum = ~oddChecksum;
+  evenChecksum = ~evenChecksum & 0x01;
+  oddChecksum = ~oddChecksum & 0x01;
 
   if ((evenCheckbit == evenChecksum) && (oddCheckbit == oddChecksum)) {
     // We got back a good position, mask away checkbits
