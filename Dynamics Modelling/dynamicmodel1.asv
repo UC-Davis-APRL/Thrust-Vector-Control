@@ -1,0 +1,29 @@
+t1 = 1.2
+t2 = 10
+
+g = 10
+
+m = 100
+
+W = m*g
+
+Ft1 = 1800
+Ft2 = 900
+Ft3 = 1
+
+syms x
+
+Fx = piecewise(x < t1,Ft1,x > t1,Ft2)
+
+a = (Fx-W)/m
+
+v = int(a,0,x)
+
+s = int(v,0,x)
+
+%fplot(a)
+
+
+fplot(s,[0,20])
+
+

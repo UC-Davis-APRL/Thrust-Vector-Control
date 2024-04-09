@@ -34,12 +34,13 @@ Q = diag([100 100 100 1 1 1 10 10 10 5 5 5]);
 R = 1;
 
 
-initialConditions = [deg2rad(10) deg2rad(15) deg2rad(-12) 0 0 0 0 0 0 0 0 0];
+initialConditions = [deg2rad(20) deg2rad(0) deg2rad(0) 0 0 0 0 0 0 0 0 0];
 goalConditions = [0 0 0 0 0 0 0 0 0 0 0 0];
 
 
 [K,S,P] = lqr(A,B,Q,R);
 
+K;
 
 open_system("fullmodel")
 set_param("fullmodel","SimulationCommand","Start")
