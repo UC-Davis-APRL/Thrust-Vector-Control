@@ -7,6 +7,9 @@ class PID_Controller {
     double kI;
     double kD;
 
+    uint32_t timeStart;
+    
+    double startError;
     double prevError;
     double integral;
   public:
