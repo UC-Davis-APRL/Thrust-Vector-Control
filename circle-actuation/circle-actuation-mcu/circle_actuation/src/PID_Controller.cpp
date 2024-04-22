@@ -7,34 +7,40 @@ PID_Controller::PID_Controller(double kP, double kI, double kD) {
   this->kI = kI;
   this->kD = kD;
 
-  timeStart = 0;
+  derivativeTimeStart = 0;
+  integralUpdateTimeStart = 0;
   
-  startError = 0.0;
-  prevError = 0.0;
+  integralStartError = 0.0;
+  integralPrevError = 0.0;
+  derivativePrevError = 0.0;
   integral = 0.0;
 }
 
 double PID_Controller::calculate(const double currentState, const double setpoint) {
   static int count = 0;
+  double derivative = 0;
 
   double error = setpoint - currentState;
-  double derivative = error - prevError;
+
+  if (count > 0) derivative = (error - derivativePrevError) / ((millis() - derivativeTimeStart) * 1000);
   
   switch (count % 3) {
     case 0:
-      startError = error;
-      timeStart = millis();
+      integralStartError = error;
+      integralUpdateTimeStart = millis();
       break;
     
     case 1:
-      prevError = error;
+      integralPrevError = error;
       break;
     
     case 2:
-      integral += ((millis() - timeStart) / (6000.0)) * (startError + (4 * prevError) + error);
+      integral += ((millis() - integralUpdateTimeStart) / (6000.0)) * (integralStartError + (4 * integralPrevError) + error);
       break;
   }
   count++;
+  derivativePrevError = error;
+  derivativeTimeStart = millis();
 
   double output = (kP * error) + (kI * integral) + (kD * derivative);
   return output;
