@@ -39,14 +39,16 @@ void updateGains(Ereg_PID_Controller* controllerPtr, double currentUllageVolume)
 }
 
 double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
+                               const double a,
+                               const double b,
+                               const double c,
                                const double pressureSetpoint,
                                const double currentPressure,
                                const double currentValveAngle) {
     PID_Controller primary = controllerPtr->primary;
     PID_Controller secondary = controllerPtr->secondary;
 
-    double desiredFlowRate = 1;
-    double desiredCv = desiredFlowRate * sqrt(controllerPtr->specificGravity / fabs(currentPressure - pressureSetpoint));
+    double desiredCv = (a * pressureSetpoint) / (sqrt((b * pressureSetpoint) + c));
     double valveFeedforward = (7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)))) * M_PI / 2.0;
     double valveSetpoint = calculate(&primary, currentPressure, pressureSetpoint) + valveFeedforward;
 
