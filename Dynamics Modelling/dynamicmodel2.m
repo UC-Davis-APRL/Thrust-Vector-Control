@@ -23,12 +23,12 @@ mdot = piecewise(x < t1, mdot1,t1 < x < t2, mdot2, x>t2, mdot3)
 
 W = g * (int(mdot,0,x) + m0)
 
-a = (Fx-W)/m
+a = (Fx-W)/(m0)
 
 v = int(a,0,x)
 
 s = int(v,0,x)
 
-fplot(a,[0,26.5])
+fplot(s,[0,26.5])
 xlabel('t(s)') 
 ylabel('Vertical Displacement (m)')
