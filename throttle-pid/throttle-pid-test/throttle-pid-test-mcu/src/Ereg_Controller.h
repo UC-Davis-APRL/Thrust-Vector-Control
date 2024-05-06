@@ -13,6 +13,7 @@ class Ereg_Controller {
         Servo valveServo;
     
     public:
+        Ereg_Controller() = default;
         Ereg_Controller(PID_Controller pidController, Servo valveServo, double ullageVolumeThreshold);
 
         void updateGains(const double currentUllageVolume);

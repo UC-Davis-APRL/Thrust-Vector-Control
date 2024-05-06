@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"name": "throttle-pid-test-mcu",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
