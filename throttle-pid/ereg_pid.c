@@ -4,27 +4,13 @@
 
 #define M_PI 3.1415
 
-void initEregController(Ereg_PID_Controller* controllerPtr, Ereg_Type_t eregType) {
+void initEregController(Ereg_PID_Controller* controllerPtr) {
     PID_Controller primary;
-    PID_Controller secondary;
-
-    switch (eregType) {
-        case KERO:
-            controllerPtr->specificGravity = 0.82;
-            break;
-        case LOX:
-            controllerPtr->specificGravity = 1.14;
-            break;
-    }
-
     init(&primary);
-    init(&secondary);
-
     controllerPtr->primary = primary;
-    controllerPtr->secondary = secondary;
 }
 
-void updateGains(Ereg_PID_Controller* controllerPtr, double currentUllageVolume) {
+void updateGains(Ereg_PID_Controller* controllerPtr, const double currentUllageVolume) {
     double multiplier = currentUllageVolume / controllerPtr->ullageVolumeThreshold;
 
     if (multiplier < 1) {

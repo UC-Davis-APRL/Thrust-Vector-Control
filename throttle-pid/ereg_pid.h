@@ -4,20 +4,18 @@
 #include "pid.h"
 
 typedef struct Ereg_PID_struct {
-    double specificGravity;
     double ullageVolumeThreshold;
 
     PID_Controller primary;
     PID_Controller secondary;
 } Ereg_PID_Controller;
 
-typedef enum Ereg_Type {
-    KERO, LOX
-} Ereg_Type_t;
-
-void initEregController(Ereg_PID_Controller* controllerPtr, Ereg_Type_t eregType);
+void initEregController(Ereg_PID_Controller* controllerPtr);
 void updateGains(Ereg_PID_Controller* controllerPtr, double currentUllageVolume);
 double calculateValveActuation(Ereg_PID_Controller* controllerPtr,
+                               const double a,
+                               const double b,
+                               const double c,
                                const double pressureSetpoint,
                                const double currentPressure,
                                const double currentValveAngle);
