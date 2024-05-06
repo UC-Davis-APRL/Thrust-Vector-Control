@@ -24,3 +24,4 @@ B = [zeros(3,4);
     [zeros(3,1) inv(J)];
     zeros(5,4);
     inv(m) 0 0 0];
+
