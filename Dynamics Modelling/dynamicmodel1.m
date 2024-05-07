@@ -1,4 +1,4 @@
-
+d
 t1 = 1.25 % throttle down
 t2 = 18 % throttle back up
 

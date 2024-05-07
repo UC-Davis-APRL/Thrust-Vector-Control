@@ -1,19 +1,19 @@
 %%% modified to approximate mass changes
 
-mdot1 = -1.5
-mdot2 = -0.75
-mdot3 = -.9
+mdot1 = -0.7
+mdot2 = -0.4
+mdot3 = -0.7
 
 m0 = 100
 
-t1 = 2.2 % throttle down
-t2 = 20 % throttle back up
+t1 = 4 % throttle down
+t2 = 15 % throttle back up
 
 g = 10
 
-Ft1 = 1500 % inital thrust
+Ft1 = 1300 % inital thrust
 Ft2 = 800 % thrust after t1 and before t2
-Ft3 = 920 % thrust after t2
+Ft3 = 1300 % thrust after t2
 
 syms x % matlab syntax stuff
 
@@ -23,12 +23,12 @@ mdot = piecewise(x < t1, mdot1,t1 < x < t2, mdot2, x>t2, mdot3)
 
 W = g * (int(mdot,0,x) + m0)
 
-a = (Fx-W)/(m0)
+a = (Fx-W)/m0
 
 v = int(a,0,x)
 
 s = int(v,0,x)
 
-fplot(s,[0,26.5])
+fplot(s,[0,50])
 xlabel('t(s)') 
 ylabel('Vertical Displacement (m)')
