@@ -15,6 +15,7 @@ class PID_Controller {
     double integralPrevError;
     double integral;
   public:
+    PID_Controller() = default;
     PID_Controller(double kP, double kI, double kD);
 
     double getP();

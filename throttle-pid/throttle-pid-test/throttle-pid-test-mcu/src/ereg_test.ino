@@ -28,4 +28,12 @@ void loop() {
   pressureSetpoint = Serial.parseFloat();
 
   eregController.setEnginePressure(a, b, c, pressureSetpoint, pressureSetpoint);
+
+  Serial.print(a);
+  Serial.print(" ");
+  Serial.print(b);
+  Serial.print(" ");
+  Serial.print(c);
+  Serial.print(" ");
+  Serial.println(pressureSetpoint);
 }

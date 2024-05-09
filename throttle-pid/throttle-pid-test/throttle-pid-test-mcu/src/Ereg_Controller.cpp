@@ -7,11 +7,12 @@
 
 Ereg_Controller::Ereg_Controller(PID_Controller pidController,
                                  Servo valveServo, 
-                                 double ullageVolumeThreshold) : setpointController(pidController) {
+                                 double ullageVolumeThreshold) {
+    this->setpointController = pidController;
     this->valveServo = valveServo;
     this->ullageVolumeThreshold = ullageVolumeThreshold;
 
-    servoOffset = 0;
+    servoOffset = 94;
 }
 
 void Ereg_Controller::updateGains(const double currentUllageVolume) {
