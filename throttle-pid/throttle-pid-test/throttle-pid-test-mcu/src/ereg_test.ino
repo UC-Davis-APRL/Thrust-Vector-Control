@@ -8,12 +8,10 @@ int servoPin = 9;
 Servo valveServo = Servo();
 
 PID_Controller setpointController = PID_Controller(0, 0, 0);
-Ereg_Controller eregController;
+Ereg_Controller eregController = Ereg_Controller(setpointController, valveServo, 1);
 
 void setup() {
   valveServo.attach(servoPin);
-  eregController = Ereg_Controller(setpointController, valveServo, 1);
-
   Serial.begin(9600);
 }
 

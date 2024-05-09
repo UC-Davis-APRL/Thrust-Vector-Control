@@ -9,12 +9,11 @@ class Ereg_Controller {
         double ullageVolumeThreshold;
         uint16_t servoOffset;
 
-        PID_Controller setpointController;
-        Servo valveServo;
+        PID_Controller& setpointController;
+        Servo& valveServo;
     
     public:
-        Ereg_Controller() = default;
-        Ereg_Controller(PID_Controller pidController, Servo valveServo, double ullageVolumeThreshold);
+        Ereg_Controller(PID_Controller& pidController, Servo& valveServo, const double ullageVolumeThreshold);
 
         void updateGains(const double currentUllageVolume);
         void setEnginePressure(const double a,

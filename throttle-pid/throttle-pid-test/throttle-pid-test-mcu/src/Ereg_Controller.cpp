@@ -5,11 +5,9 @@
 #include "Ereg_Controller.h"
 #include "PID_Controller.h"
 
-Ereg_Controller::Ereg_Controller(PID_Controller pidController,
-                                 Servo valveServo, 
-                                 double ullageVolumeThreshold) {
-    this->setpointController = pidController;
-    this->valveServo = valveServo;
+Ereg_Controller::Ereg_Controller(PID_Controller& pidController,
+                                 Servo& valveServo, 
+                                 double ullageVolumeThreshold): setpointController(pidController), valveServo(valveServo) {
     this->ullageVolumeThreshold = ullageVolumeThreshold;
 
     servoOffset = 94;
