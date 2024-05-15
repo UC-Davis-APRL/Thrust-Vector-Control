@@ -16,18 +16,20 @@ A = [zeros(3), eye(3), zeros(3,6);
     ]
    
 
-
 B = [zeros(3,4);
     zeros(3,1), imat;
     zeros(5,4);
     1/mass, zeros(1,3)]
 
-Q = diag([1 1 1    1 1 1    100 100 100     1 1 1])
+Q = diag([1000 1000 1000     1 1 1     10 10 10    1 1 1])
 R = 1
 
-[K,S,P] = lqr(A,B,Q,R)
+V = 5
 
-G = [0 0 0     0 0 0    1 0 0     0 0 0]'
+[K,S,P] = lqr(A,B,Q,R)
+K = round(K,5)
+
+G = [0 0 0     0 0 0    0 0 0    0 0 0]'
 
 
 
