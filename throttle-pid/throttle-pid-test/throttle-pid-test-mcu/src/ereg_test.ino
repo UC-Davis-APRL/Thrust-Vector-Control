@@ -16,22 +16,22 @@ void setup() {
 }
 
 void loop() {
-  while (Serial.available() == 0);
+  if (Serial.available()) {
+    double a, fluidDensity, tankPressure, pressureSetpoint;
 
-  double a, b, c, pressureSetpoint;
+    a = Serial.parseFloat();
+    fluidDensity = Serial.parseFloat();
+    tankPressure = Serial.parseFloat();
+    pressureSetpoint = Serial.parseFloat();
 
-  a = Serial.parseFloat();
-  b = Serial.parseFloat();
-  c = Serial.parseFloat();
-  pressureSetpoint = Serial.parseFloat();
+    eregController.setEnginePressure(a, fluidDensity, tankPressure, pressureSetpoint, pressureSetpoint);
 
-  eregController.setEnginePressure(a, b, c, pressureSetpoint, pressureSetpoint);
-
-  Serial.print(a);
-  Serial.print(" ");
-  Serial.print(b);
-  Serial.print(" ");
-  Serial.print(c);
-  Serial.print(" ");
-  Serial.println(pressureSetpoint);
+    Serial.print(a);
+    Serial.print(" ");
+    Serial.print(fluidDensity);
+    Serial.print(" ");
+    Serial.print(tankPressure);
+    Serial.print(" ");
+    Serial.println(pressureSetpoint);
+  }
 }
