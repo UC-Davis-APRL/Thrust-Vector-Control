@@ -34,8 +34,8 @@ void Ereg_Controller::setEnginePressure(
     double c = 2 * fluidDensity * tankPressure;
     
     double desiredCv = (a * pressureSetpoint) / (sqrt((b * pressureSetpoint) + c));
-    double valveFeedforward = (7.84033 + ((-0.7624865 - 7.84033) / (1 + pow(desiredCv / 7243.604, 0.1969319)))) * 90;
-    valveFeedforward = constrain(valveFeedforward, 0, 90);
+    double valveFeedforward = (2349.578 + ((-0.4532749 - 2349.578) / (1 + pow(desiredCv / 139686000, 0.2498469)))) * 30;
+    valveFeedforward = constrain(valveFeedforward, 0, 30);
     double valveSetpoint = setpointController.calculate(currentPressure, pressureSetpoint) + valveFeedforward;
 
     uint16_t servoPulseWidth = (uint16_t)(map(valveSetpoint, 0, 90, 1000, 2000)) + servoOffset;
