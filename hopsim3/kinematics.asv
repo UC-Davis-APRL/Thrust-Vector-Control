@@ -1,5 +1,0 @@
-function accel_w = linear_kin_w(mass, euler, T, delx, dely)
-
-accel_w = (1/mass) * (force_grav_w (mass) + )
-
-end

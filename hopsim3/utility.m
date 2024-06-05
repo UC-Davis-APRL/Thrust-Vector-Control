@@ -1,17 +1,35 @@
 disp ("hello");
-function w2b_vec = world2body(world_vec, euler)
 
-phi = euler(1);
-theta = euler(2);
-psi = euler(3);
+function w2b_vec = world2body(world_vec, rotation)
 
-A = [1 0 0 ; 0, cos(phi), -sin(phi); 0 0 1];
+rinv = [rotation(1), -rotation(2:4)]
+w2b_vec = rotation *  world_vec  * rinv;
 
-B = [cos(theta), 0, sin(theta); 0 1 0; -sin(theta), 0, cos(theta)];
+end
 
-C = [cos(psi), -sin(psi), 0; sin(psi), cos(psi), 0; 0 0 1];
 
-w2b_vec = C * B * A * world_vec
+
+
+function error_quat = attitudeError(command_quat, quat)
+
+
+    % qc1 = command_quat(1)
+    % qc2 = command_quat(2)
+    % qc3 = command_quat(3)
+    % qc4 = command_quat(4)
+    % 
+    % 
+    % A = [q4c, q3c, -q2c, -qc1;
+    %     -q3c, q4c, q1c, -q2c;
+    %     q2c, -q1c, q4c, -q3c;
+    %     q1c, q2c, q3c, q4c]
+    % 
+    % error_quat = A * quat
+
+
+    ''
+
+
 
 end
 
