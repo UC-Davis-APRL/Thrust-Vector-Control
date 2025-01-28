@@ -1,17 +1,17 @@
 #include <Arduino.h>
-#include <Servo.h>
+#include <Stepper.h>
 
 #include "PID_Controller.h"
 #include "Ereg_Controller.h"
 
-int servoPin = 9;
-Servo valveServo = Servo();
+Stepper valveStepper = Stepper(200, 8, 9, 10, 11);
+int stepperRPM;
 
 PID_Controller setpointController = PID_Controller(0, 0, 0);
-Ereg_Controller eregController = Ereg_Controller(setpointController, valveServo, 1);
+Ereg_Controller eregController = Ereg_Controller(setpointController, valveStepper, 1);
 
 void setup() {
-  valveServo.attach(servoPin);
+  valveStepper.setSpeed(stepperRPM);
   Serial.begin(9600);
 }
 

@@ -1,16 +1,16 @@
 #include <cmath>
 #include <Arduino.h>
-#include <Servo.h>
+#include <Stepper.h>
 
 #include "Ereg_Controller.h"
 #include "PID_Controller.h"
 
 Ereg_Controller::Ereg_Controller(PID_Controller& pidController,
-                                 Servo& valveServo, 
-                                 double ullageVolumeThreshold): setpointController(pidController), valveServo(valveServo) {
+                                 Stepper& valveServo, 
+                                 double ullageVolumeThreshold): setpointController(pidController), valveStepper(valveStepper) {
     this->ullageVolumeThreshold = ullageVolumeThreshold;
 
-    servoOffset = -288;
+    currentPosition = 0;
 }
 
 void Ereg_Controller::updateGains(const double currentUllageVolume) {
@@ -38,6 +38,6 @@ void Ereg_Controller::setEnginePressure(
     valveFeedforward = constrain(valveFeedforward, 0, 30);
     double valveSetpoint = setpointController.calculate(currentPressure, pressureSetpoint) + valveFeedforward;
 
-    uint16_t servoPulseWidth = (uint16_t)(map(valveSetpoint, 0, 90, 1000, 2000)) + servoOffset;
-    valveServo.writeMicroseconds(servoPulseWidth);
+    int valveStepGoal = map(valveSetpoint, 0, 30, 0, 200);
+    valveStepper.step(valveStepGoal - currentPosition);
 }
